@@ -14,7 +14,7 @@ library(caret)
 
 #Setting the working directory
 #ATTENTION: Change directory according to your own system
-setwd("C:/Users/abhi2/Downloads")
+setwd("/Users/Shib/Documents/UW_CourseWork/2nd Quarter/DS-573/DS_Project")
 
 
 #Loading our cleaned csv
