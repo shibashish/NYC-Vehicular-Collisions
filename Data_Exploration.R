@@ -46,7 +46,7 @@ data_datewise$MONTH_char <- month_vector
 data_datewise_char <- unite(data_datewise,new_period, MONTH_char, YEAR ,  sep = '-')
 
 
-factor_level = unique(data_datewise_char$new_period)
+factor_level <- unique(data_datewise_char$new_period)
 data_datewise_char$new_period <- factor(data_datewise_char$new_period, levels = factor_level)
 
 ggplot(data_datewise_char , aes(x = new_period , y = number.of.accidents, group = 1)) + 
@@ -64,7 +64,7 @@ data_datewise$MONTH_char <- month_vector
 data_datewise_char <- unite(data_datewise,new_period, MONTH_char, YEAR ,  sep = '-')
 
 
-factor_level = unique(data_datewise_char$new_period)
+factor_level <- unique(data_datewise_char$new_period)
 data_datewise_char$new_period <- factor(data_datewise_char$new_period, levels = factor_level)
 
 ggplot(data_datewise_char , aes(x = new_period , y = number.of.accidents, group = 1)) + 
@@ -80,8 +80,8 @@ manhatten.zip <- c(10026, 10027, 10030, 10037, 10039,10001, 10011, 10018, 10019,
 nyc_manhatten <- nyc %>%
   filter(ZIP.CODE %in% manhatten.zip)
 
-nyc_manhatten$LATITUDE = round(nyc_manhatten$LATITUDE,2)
-nyc_manhatten$LONGITUDE = round(nyc_manhatten$LONGITUDE,2)
+nyc_manhatten$LATITUDE <- round(nyc_manhatten$LATITUDE,2)
+nyc_manhatten$LONGITUDE <- round(nyc_manhatten$LONGITUDE,2)
 
 nyc_manhatten_2016 <- subset(nyc_manhatten , YEAR == 2016)
 nyc_manhatten_2015 <- subset(nyc_manhatten , YEAR == 2015)
@@ -98,7 +98,7 @@ plot1=ny_plot+stat_density2d(data= nyc_manhatten, aes(x = LONGITUDE, y = LATITUD
 
 freq_manhatted <- aggregate(NUMBER.OF.PERSONS.INJURED ~ LONGITUDE+LATITUDE , data = nyc_manhatten , length)
 
-ny_plot=ggmap(get_map(location = "Manhatten", ,zoom = 13, maptype='hybrid'))
+ny_plot <- ggmap(get_map(location = "Manhatten", ,zoom = 13, maptype='hybrid'))
 plot1=ny_plot+ geom_tile(data = nyc_manhatten , aes(x = LONGITUDE , y = LATITUDE , alpha = NUMBER.OF.PERSONS.INJURED) , fill = 'red')
 
 
@@ -131,17 +131,17 @@ wordcloud(words = reasons$reason, freq = reasons$count, min.freq = 1,
 #Creating heatmap of vehicle collisions by month
 
 
-nyc_map = get_map(location = "NYC")
+nyc_map <- get_map(location = "NYC")
 #Geting the New York City Map
 
-nyc_round = nyc
-nyc_round$LATITUDE = round(nyc_round$LATITUDE,2)
-nyc_round$LONGITUDE = round(nyc_round$LONGITUDE,2)
-nyc_round$Hour = as.numeric(nyc_round$Hour)
+nyc_round <- nyc
+nyc_round$LATITUDE <- round(nyc_round$LATITUDE,2)
+nyc_round$LONGITUDE <- round(nyc_round$LONGITUDE,2)
+nyc_round$Hour <- as.numeric(nyc_round$Hour)
 #Creating a new dataframe nyc_round, with rounded longitude and latitude to 2 decimal points and a numeric hour
 
-hour_vec = c("00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00")
-hour_vec_name = c("00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23")
+hour_vec <- c("00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00")
+hour_vec_name <- c("00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23")
 #Creating 2 hour reference vectors used for building plot titles and Filenames
 
 
@@ -150,10 +150,10 @@ for (hour in 0:23)
   #Running a for loop for hour from 0:23
 {
   
-  nyc_hour = subset(nyc_round, nyc_round$Hour == hour)
+  nyc_hour <- subset(nyc_round, nyc_round$Hour == hour)
   #Creating a new data frame that has the number of accidents by location for that particular hour
   
-  title = hour_vec[hour+1]
+  title <- hour_vec[hour+1]
   #Creating the title for the ggplot
   
   ggmap(nyc_map) + ggtitle(title) + stat_density2d(data= nyc_hour, aes(x = LONGITUDE, y = LATITUDE, alpha=..level..),bins = 10, geom = 'polygon')+
@@ -163,7 +163,7 @@ for (hour in 0:23)
   
   
   
-  file_name = paste(hour_vec_name[hour+1],".png",sep = "")
+  file_name <- paste(hour_vec_name[hour+1],".png",sep = "")
   #Adding the .png extension to the filename
   ggsave(filename = file_name,device = "png",scale = 3)    
   #Saving the plots to your present working directory
@@ -173,14 +173,14 @@ for (hour in 0:23)
 
 #Creating heatmps of vehicle collisions for each month in the 4 years
 
-nyc_round = nyc
-nyc_round$LATITUDE = round(nyc_round$LATITUDE,2)
-nyc_round$LONGITUDE = round(nyc_round$LONGITUDE,2)
-nyc_round$MONTH = as.numeric(nyc_round$MONTH)
+nyc_round <- nyc
+nyc_round$LATITUDE <- round(nyc_round$LATITUDE,2)
+nyc_round$LONGITUDE <- round(nyc_round$LONGITUDE,2)
+nyc_round$MONTH <- as.numeric(nyc_round$MONTH)
 #Creating a new dataframe nyc_round, with rounded longitude and latitude to 2 decimal points and a numeric month
 
-month_vec = c("January","February","March","April","May","June","July","August","September","October","November","December")
-month_vec_numeric = c("01","02","03","04","05","06","07","08","09","10","11","12")
+month_vec <- c("January","February","March","April","May","June","July","August","September","October","November","December")
+month_vec_numeric <- c("01","02","03","04","05","06","07","08","09","10","11","12")
 #Creating 2 month reference vectors used for building plot titles and Filenames
 
 
@@ -191,10 +191,10 @@ for (year in 2013:2016)
     #Running a for loop for month from 1:12
     
   {
-    freq_accident = aggregate(NUMBER.OF.PEDESTRIANS.INJURED ~ LONGITUDE + LATITUDE, data = nyc_round[nyc_round$YEAR==year & nyc_round$MONTH == month,],length)
+    freq_accident <- aggregate(NUMBER.OF.PEDESTRIANS.INJURED ~ LONGITUDE + LATITUDE, data = nyc_round[nyc_round$YEAR==year & nyc_round$MONTH == month,],length)
     #Creating a new data frame that has the number of accidents by location for that particular month and year
     
-    title = paste(month_vec[month],year,sep = " - ")
+    title <- paste(month_vec[month],year,sep = " - ")
     #Creating the title for the ggplot
     
     ggmap(nyc_map) + ggtitle(title) + scale_alpha_continuous(name = "Accident Frequency",limit =c(0,1800) )  +  geom_tile(data = freq_accident, aes(x = LONGITUDE, y = LATITUDE, alpha = NUMBER.OF.PERSONS.INJURED),
@@ -206,9 +206,9 @@ for (year in 2013:2016)
     #This will give us a nice output of the heatmap with darker tiles representing higher frequencies
     
     
-    file_name = paste(year,month_vec_numeric[month],sep = "")
+    file_name <- paste(year,month_vec_numeric[month],sep = "")
     #Creating the file name using the month as a string and year
-    file_name = paste(file_name,".png",sep = "")
+    file_name <- paste(file_name,".png",sep = "")
     #Adding the .png extension to the filename
     ggsave(filename = file_name,device = "png",scale = 3)    
     #Saving the plots to your present working directory
